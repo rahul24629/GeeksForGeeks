@@ -1,0 +1,17 @@
+class Solution {
+  public:
+    int maxSubarrayXOR(vector<int>& arr, int k) {
+        // code here
+        int ans=0;
+        for(int i=0;i<k;i++){
+            ans^=arr[i];
+        }
+        int maxXOR=ans;
+        for(int i=k;i<arr.size();i++){
+            ans^=arr[i-k];
+            ans^=arr[i];
+            maxXOR=max(ans,maxXOR);
+        }
+        return maxXOR;
+    }
+};

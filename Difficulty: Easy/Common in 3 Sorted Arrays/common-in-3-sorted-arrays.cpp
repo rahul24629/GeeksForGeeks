@@ -1,20 +1,27 @@
 class Solution {
-public:
-    vector<int> commonElements(vector<int> &arr1, vector<int> &arr2, vector<int> &arr3) {
-        int i = 0, j = 0, k = 0;
+  public:
+    vector<int> commonElements(vector<int> &a, vector<int> &b, vector<int> &c) {
+        // code here
         vector<int> ans;
-
-        while(i < arr1.size() && j < arr2.size() && k < arr3.size()) {
-
-            if(arr1[i] == arr2[j] && arr2[j] == arr3[k]) {
-                if(ans.empty() || ans.back() != arr1[i]) {
-                    ans.push_back(arr1[i]);
+        int i=0;
+        int j=0;
+        int k=0;
+        
+        while(i<a.size() && j<b.size() && k<c.size()){
+            if(a[i]<b[j] || a[i]<c[k]){
+                i++;
+            }else if(b[j]<a[i] || b[j]<c[k]){
+                j++;
+            }else if(c[k]<a[i] || c[k]<b[j]){
+                k++;
+            }else if(a[i]==b[j] && c[k]==a[i]){
+                if(ans.empty() || ans.back()!=a[i]){
+                ans.push_back(a[i]);
                 }
-                i++; j++; k++;
+                i++;
+                j++;
+                k++;
             }
-            else if(arr1[i] < arr2[j]) i++;
-            else if(arr2[j] < arr3[k]) j++;
-            else k++;
         }
         return ans;
     }

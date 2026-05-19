@@ -1,24 +1,38 @@
-/* A binary tree node has data, pointer to left child
-   and a pointer to right child
-struct Node
-{
+/*
+Definition for Node
+class Node {
+public:
     int data;
-    struct Node* left;
-    struct Node* right;
+    Node* left;
+    Node* right;
 
-    Node(int x){
-        data = x;
-        left = right = NULL;
+    Node(int val) {
+        data = val;
+        left = right = nullptr;
     }
-}; */
-
-// Function to return a list containing the level order traversal in spiral form.
+};
+*/
 class Solution {
   public:
     int sumBT(Node* root) {
         // code here
         if(root==nullptr) return 0;
-        
-        return root->data+sumBT(root->left)+sumBT(root->right);
+        queue<Node*> q;
+        q.push(root);
+        int ans=0;
+        while(!q.empty()){
+            Node* curr=q.front();
+            q.pop();
+            ans+=curr->data;
+            
+            if(curr->left!=nullptr){
+                q.push(curr->left);
+            }
+            
+            if(curr->right!=nullptr){
+                q.push(curr->right);
+            }
+        }
+        return ans;
     }
 };

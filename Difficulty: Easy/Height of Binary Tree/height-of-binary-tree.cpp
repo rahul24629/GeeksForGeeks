@@ -1,4 +1,5 @@
 /*
+Definition for Node
 class Node {
 public:
     int data;
@@ -7,22 +8,21 @@ public:
 
     Node(int val) {
         data = val;
-        left = right = NULL;
+        left = right = nullptr;
     }
 };
 */
-
 class Solution {
   public:
     int height(Node* root) {
-        // code here
-        if(root==nullptr) return -1;
         
-        int leftHeight=height(root->left);
-        int rightHeight=height(root->right);
+        if(root == nullptr) return -1;
         
-        int currHeight=max(leftHeight, rightHeight)+1;
+        int leftSide = height(root->left);
+        int rightSide = height(root->right);
         
-        return currHeight;
+        return max(leftSide, rightSide) + 1;
+        
+        
     }
 };

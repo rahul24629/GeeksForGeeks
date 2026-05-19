@@ -16,32 +16,28 @@ class Node {
 
 class Solution {
   public:
-    vector<vector<int>> levelOrder(Node *root) {
+    vector<int> levelOrder(Node *root) {
         // code here
-        vector<vector<int>> ans;
+        if(root==nullptr) return {};
+        vector<int> ans;
         
         queue<Node*> q;
-        
         q.push(root);
         
         while(!q.empty()){
+            Node* curr=q.front();
+            q.pop();
             
-            int size=q.size();
+            ans.push_back(curr->data);
             
-            vector<int> level;
-            
-            while(size--){
-                Node* curr=q.front();
-                q.pop();
-                
-                level.push_back(curr->data);
-                
-                if(curr->left!=nullptr) q.push(curr->left);
-                if(curr->right!=nullptr) q.push(curr->right);
-                
+            if(curr->left!=nullptr){
+                q.push(curr->left);
             }
             
-            ans.push_back(level);
+            if(curr->right!=nullptr){
+                q.push(curr->right);
+            }
+            
         }
         
         return ans;

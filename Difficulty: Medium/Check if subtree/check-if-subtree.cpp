@@ -1,59 +1,38 @@
-/* A binary tree node
-
-struct Node
-{
+/*
+Structure of a Tree Node
+class Node {
+  public:
     int data;
-    struct Node* left;
-    struct Node* right;
+    Node *left;
+    Node *right;
 
-    Node(int x){
-        data = x;
-        left = right = NULL;
+    Node(int val) {
+        data = val;
+        left = right = nullptr;
     }
 };
- */
+*/
 
 class Solution {
   public:
-    bool iden(Node* root1, Node* root2){
-        if(root1==nullptr && root2==nullptr){
-            return 1;
-        }
-        else if(root1==nullptr || root2==nullptr){
-            return 0;
-        }
+    bool isIdenTical(Node* root1, Node* root2){
+        if(root1==nullptr && root2==nullptr) return true;
+        if(root1==nullptr || root2==nullptr) return false;
         
-        if(root1->data!=root2->data){
-            return 0;
-        }
+        if(root1->data!=root2->data) return false;
         
-        return iden(root1->left, root2->left)
-            && iden(root1->right, root2->right);
+        return isIdenTical(root1->left,root2->left) && isIdenTical(root1->right,root2->right);
     }
-
-    bool isSubTree(Node* T, Node* S) {
+    bool isSubTree(Node *root1, Node *root2) {
+        // code here
+        if(root2==nullptr) return true;
         
-        if(T==nullptr && S==nullptr){
-            return 1;
-        }
-        else if(T==nullptr|| S==nullptr){  
-            return 0;
-        }
+        if(root1==nullptr) return false;
         
-       
-        if(T->data == S->data){
-            if(iden(T, S)){
-                return 1;
-            }
+        if(root1->data==root2->data){
+            if(isIdenTical(root1,root2)) return true;
         }
         
-        
-        bool isLeftSubTree = isSubTree(T->left, S);
-        
-        if(!isLeftSubTree){
-            return isSubTree(T->right, S);   
-        }
-        
-        return 1;   
+        return isSubTree(root1->left, root2) || isSubTree(root1->right,root2);
     }
 };
